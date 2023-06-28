@@ -7,6 +7,15 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Navbar = () => {
   const isUserLoggedIn = true;
+  const [providers, setProviders] = useState(null);
+
+  // useEffect(() => {
+  //   const setProvider = async () => {
+  //     const response = await getProviders();
+  //     setProviders(response);
+  //   };
+  //   setProvider();
+  // }, []);
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -21,7 +30,7 @@ const Navbar = () => {
         <p className="logo_text">하루 이야기</p>
       </Link>
 
-      {/* Mobile Navigation */}
+      {/* Desktop Navigation */}
       <div className="sm:flex hidden">
         {isUserLoggedIn ? (
           <div className="flex gap-3 md:gap-5">
@@ -43,13 +52,17 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <button
-              type="button"
-              onClick={() => signIn(provider.id)}
-              className="black_btn"
-            >
-              로그인
-            </button>
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
+                  로그인
+                </button>
+              ))}
           </>
         )}
       </div>
