@@ -7,7 +7,11 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Navbar = () => {
   const isUserLoggedIn = true;
+
   const [providers, setProviders] = useState(null);
+  const [toggleDropdown, setToggleDropdown] = useState(false);
+
+  // Providers 항목 가져오기 (ex. Google, Facebook, Github)
 
   // useEffect(() => {
   //   const setProvider = async () => {
@@ -49,6 +53,38 @@ const Navbar = () => {
                 alt="profile"
               />
             </Link>
+          </div>
+        ) : (
+          <>
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
+                  로그인
+                </button>
+              ))}
+          </>
+        )}
+      </div>
+
+      {/* Mobile Navigation */}
+      <div className="sm:hidden flex relative">
+        {isUserLoggedIn ? (
+          <div className="flex">
+            <Image
+              src="/assets/images/logo.svg"
+              width={37}
+              height={37}
+              className="rounded-full"
+              alt="profile"
+              onClick={() => {
+                setToggleDropdown(!toggleDropdown);
+              }}
+            />
           </div>
         ) : (
           <>
