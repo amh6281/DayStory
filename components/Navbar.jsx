@@ -85,6 +85,35 @@ const Navbar = () => {
                 setToggleDropdown(!toggleDropdown);
               }}
             />
+
+            {toggleDropdown && (
+              <div className="dropdown">
+                <Link
+                  href="/profile"
+                  className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}
+                >
+                  프로필
+                </Link>
+                <Link
+                  href="/create-story"
+                  className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}
+                >
+                  하루 만들기
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setToggleDropdown(false);
+                    signOut();
+                  }}
+                  className="mt-5 w-full black_btn"
+                >
+                  로그아웃
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <>
