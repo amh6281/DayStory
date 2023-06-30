@@ -2,8 +2,8 @@ import { Schema, model, models } from "mongoose";
 
 const StorySchema = new Schema({
   creator: {
-    type: mongoose.Schema.Types.ObjectId,
-    res: "User",
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
   story: {
     type: String,
