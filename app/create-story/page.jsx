@@ -12,7 +12,29 @@ const CreateStory = () => {
     tag: "",
   });
 
-  const createStory = async () => {};
+  const createStory = async () => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("/api/story/new", {
+        method: "POST",
+        body: JSON.stringify({
+          story: post.story,
+          tag: post.tag,
+          userId: session?.user.id,
+        }),
+      });
+
+      if (response.ok) {
+        router.push("/");
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <Form
