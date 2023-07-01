@@ -8,6 +8,12 @@ import { usePathname, useRouter } from "next/navigation";
 const StoryCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const [copied, setCopied] = useState("");
 
+  const handleCopy = () => {
+    setCopied(post.story);
+    navigator.clipboard.writeText(post.story);
+    setTimeout(() => setCopied(""), 3000);
+  };
+
   return (
     <div className="story_card">
       <div className="flex justify-between items-start gap-5">
@@ -30,7 +36,12 @@ const StoryCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           </div>
         </div>
 
-        <div className="copy_btn" onClick={() => {}}>
+        <div
+          className="copy_btn"
+          onClick={() => {
+            handleCopy();
+          }}
+        >
           <Image
             src={
               copied === post.story
@@ -39,6 +50,7 @@ const StoryCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             }
             width={12}
             height={12}
+            alt=""
           />
         </div>
       </div>
