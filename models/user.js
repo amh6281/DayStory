@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     unique: [true, "이메일이 이미 존재합니다!"],
     required: [true, "이메일이 필요합니다!"],
   },
-  email: {
+  username: {
     type: String,
     required: [true, "아이디가 필요합니다!"],
     match: [
