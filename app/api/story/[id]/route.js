@@ -39,3 +39,16 @@ export const PATCH = async (req, { params }) => {
     return new Response("이야기 업데이트에 실패하였습니다.", { status: 500 });
   }
 };
+
+// DELETE
+export const DELETE = async (req, { params }) => {
+  try {
+    await connectToDB();
+
+    await Story.findByIdAndRemove(params.id);
+
+    return new Response("이야기를 삭제하였습니다.", { status: 200 });
+  } catch (err) {
+    return new Response("이야기 삭제에 실패하였습니다.", { status: 500 });
+  }
+};
