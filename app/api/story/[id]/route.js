@@ -16,3 +16,26 @@ export const GET = async (req, { params }) => {
     return new Response("이야기를 가져오는데 실패하였습니다.", { status: 500 });
   }
 };
+
+// PATCH
+export const PATCH = async (req, { params }) => {
+  const { story, tag } = await request.json();
+
+  try {
+    await connectToDB();
+
+    const existingStory = await Story.findById(params.id);
+
+    if (!existingStory)
+      return new Response("이야기를 찾을 수 없습니다.", { status: 404 });
+
+    existingStory.story = story;
+    existingStory.tag = tag;
+
+    await existingStory.save();
+
+    return new Response(JSON.stringify(existingStory), { status: 200 });
+  } catch (err) {
+    return new Response("이야기 업데이트에 실패하였습니다.", { status: 500 });
+  }
+};
