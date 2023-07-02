@@ -26,7 +26,6 @@ const MyProfile = () => {
   return (
     <Profile
       name="My"
-      desc="Welcome"
       data={posts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
