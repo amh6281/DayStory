@@ -26,7 +26,23 @@ const MyProfile = () => {
     router.push(`/update-story?id=${post._id}`);
   };
 
-  const handleDelete = async (post) => {};
+  const handleDelete = async (post) => {
+    const hasConfirmed = confirm("이 이야기를 정말 삭제하시겠습니까?");
+
+    if (hasConfirmed) {
+      try {
+        await fetch(`/api/story/${post._id}`, {
+          method: "DELETE",
+        });
+
+        const filteredPosts = posts.filter((p) => p._id !== post._id);
+
+        setPosts(filteredPosts);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   return (
     <Profile
