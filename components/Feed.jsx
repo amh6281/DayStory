@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import StoryCardList from "./StoryCardList";
 
 const Feed = () => {
-  const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
 
-  const handleSearchChange = (e) => {};
+  const [searchText, setSearchText] = useState("");
+  const [searchedResults, setSearchedResults] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -18,6 +18,18 @@ const Feed = () => {
     };
     fetchPosts();
   }, []);
+
+  const filterStoris = (searchText) => {
+    const regex = new RegExp(searchText, "i");
+    return posts.filter(
+      (item) =>
+        regex.test(item.creator.username) ||
+        regex.test(item.story) ||
+        regex.test(item.tag)
+    );
+  };
+
+  const handleSearchChange = (e) => {};
 
   return (
     <section className="feed">
