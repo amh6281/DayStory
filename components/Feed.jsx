@@ -29,7 +29,12 @@ const Feed = () => {
     );
   };
 
-  const handleSearchChange = (e) => {};
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+
+    const searchResult = filterStoris(e.target.value);
+    setSearchedResults(searchResult);
+  };
 
   return (
     <section className="feed">
@@ -43,8 +48,11 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-
-      <StoryCardList data={posts} handleTagClick={() => {}} />
+      {searchText ? (
+        <StoryCardList data={searchedResults} handleTagClick={() => {}} />
+      ) : (
+        <StoryCardList data={posts} handleTagClick={() => {}} />
+      )}
     </section>
   );
 };
