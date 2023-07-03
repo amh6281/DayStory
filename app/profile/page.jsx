@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import Profile from "@components/Profile";
 
 const MyProfile = () => {
+  const router = useRouter();
+
   const { data: session } = useSession();
 
   const [posts, setPosts] = useState([]);
@@ -20,8 +22,11 @@ const MyProfile = () => {
     if (session?.user.id) fetchPosts();
   }, [session?.user.id]); // useSession은 비동기. 따라서, session값을 받아온 후에 호출되어야 하기 때문에 의존성배열에 session.user.id
 
-  const handleEdit = async () => {};
-  const handleDelete = async () => {};
+  const handleEdit = (post) => {
+    router.push(`/update-story?id=${post._id}`);
+  };
+
+  const handleDelete = async (post) => {};
 
   return (
     <Profile

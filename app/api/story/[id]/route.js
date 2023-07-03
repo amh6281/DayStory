@@ -1,7 +1,7 @@
 import { connectToDB } from "@utils/database";
 import Story from "@models/story";
 
-// GET
+// GET (기존 Story 정보 fetch)
 export const GET = async (req, { params }) => {
   try {
     await connectToDB();
@@ -18,7 +18,7 @@ export const GET = async (req, { params }) => {
 };
 
 // PATCH
-export const PATCH = async (req, { params }) => {
+export const PATCH = async (request, { params }) => {
   const { story, tag } = await request.json();
 
   try {
@@ -34,7 +34,7 @@ export const PATCH = async (req, { params }) => {
 
     await existingStory.save();
 
-    return new Response(JSON.stringify(existingStory), { status: 200 });
+    return new Response("이야기 업데이트에 성공하였습니다.", { status: 200 });
   } catch (err) {
     return new Response("이야기 업데이트에 실패하였습니다.", { status: 500 });
   }
