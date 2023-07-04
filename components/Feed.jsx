@@ -20,7 +20,7 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  const filterStoris = (searchText) => {
+  const filterStories = (searchText) => {
     const regex = new RegExp(searchText, "i");
     return posts.filter(
       (item) =>
@@ -36,10 +36,17 @@ const Feed = () => {
 
     setSearchTimeout(
       setTimeout(() => {
-        const searchResult = filterStoris(e.target.value);
+        const searchResult = filterStories(e.target.value);
         setSearchedResults(searchResult);
       }, 500)
     );
+  };
+
+  const handleTagClick = (tagName) => {
+    setSearchText(tagName);
+
+    const searchResult = filterStories(tagName);
+    setSearchedResults(searchResult);
   };
 
   return (
@@ -55,9 +62,9 @@ const Feed = () => {
         />
       </form>
       {searchText ? (
-        <StoryCardList data={searchedResults} handleTagClick={() => {}} />
+        <StoryCardList data={searchedResults} handleTagClick={handleTagClick} />
       ) : (
-        <StoryCardList data={posts} handleTagClick={() => {}} />
+        <StoryCardList data={posts} handleTagClick={handleTagClick} />
       )}
     </section>
   );
