@@ -8,6 +8,7 @@ const Feed = () => {
 
   const [searchText, setSearchText] = useState("");
   const [searchedResults, setSearchedResults] = useState([]);
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -30,10 +31,15 @@ const Feed = () => {
   };
 
   const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
     setSearchText(e.target.value);
 
-    const searchResult = filterStoris(e.target.value);
-    setSearchedResults(searchResult);
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = filterStoris(e.target.value);
+        setSearchedResults(searchResult);
+      }, 500)
+    );
   };
 
   return (
@@ -41,7 +47,7 @@ const Feed = () => {
       <form className="relative w-full flex-center">
         <input
           type="text"
-          placeholder="search for a tag or username"
+          placeholder="컨텐츠, 태그, 이름을 검색하세요."
           value={searchText}
           onChange={handleSearchChange}
           required
