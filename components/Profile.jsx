@@ -10,6 +10,7 @@ const Profile = ({ name, data, handleEdit, handleDelete }) => {
       <div className="mt-10 story_layout">
         {data.map((post) => (
           <StoryCard
+            name={name}
             key={post._id}
             post={post}
             handleEdit={() => handleEdit && handleEdit(post)}
