@@ -10,7 +10,7 @@ const StorySchema = new Schema({
     required: [true, "이야기가 필요합니다."],
   },
   tag: {
-    type: String,
+    type: [String],
     required: [true, "태그가 필요합니다."],
   },
 });
