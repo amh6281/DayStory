@@ -38,7 +38,7 @@ const CreateStory = () => {
       setSubmitting(false);
     }
   };
-  console.log(post);
+
   return (
     <Form
       type="Create"

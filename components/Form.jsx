@@ -36,7 +36,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             onChange={(e) =>
               setPost({ ...post, tag: e.target.value.split(",") })
             }
-            placeholder="#tag"
+            placeholder="이야기"
             type="text"
             required
             className="form_input"
