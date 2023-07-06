@@ -69,12 +69,17 @@ const StoryCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       </div>
 
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.story}</p>
-      <p
-        className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={() => handleTagClick && handleTagClick(post.tag)}
-      >
-        #{post.tag}
-      </p>
+      <div className="flex gap-2">
+        {post.tag.map((item) => (
+          <p
+            className="font-inter text-sm blue_gradient cursor-pointer"
+            onClick={() => handleTagClick && handleTagClick(item)}
+            key={item}
+          >
+            #{item}
+          </p>
+        ))}
+      </div>
 
       {session?.user.id === post.creator._id && pathName === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">

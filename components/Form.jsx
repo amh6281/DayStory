@@ -33,7 +33,9 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           </span>
           <input
             value={post.tag}
-            onChange={(e) => setPost({ ...post, tag: e.target.value })}
+            onChange={(e) =>
+              setPost({ ...post, tag: e.target.value.split(",") })
+            }
             placeholder="#tag"
             type="text"
             required
